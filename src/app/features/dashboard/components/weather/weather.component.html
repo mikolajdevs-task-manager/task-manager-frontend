@@ -1,0 +1,11 @@
+<ng-container *ngIf="weather$ | async as weather">
+  <mat-card *ngIf="alertState | async" appearance="outlined" class="weather-container">
+    <div class="weather-details">
+      <span>{{ 'Current weather at ' + weather.location + ': ' }}</span>
+      <span>{{ weather.temp + '°C, ' + (weather.description | lowercase) }}</span>
+    </div>
+    <button (click)="close()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card>
+</ng-container>

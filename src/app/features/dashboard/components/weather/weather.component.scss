@@ -1,0 +1,15 @@
+.weather-container {
+  background-color: #fff6ee;
+  border: #ff8800 1px solid;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.15rem 0.15rem 0 1rem;
+
+  .weather-details {
+    display: flex;
+    gap: 0.5rem;
+  }
+}

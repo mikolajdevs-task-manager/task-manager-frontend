@@ -1,0 +1,10 @@
+<div class="hero">
+  @if ((authFormState$ | async) === AuthFormState.LOGIN) {
+    <app-login (authFormStateChange)="onAuthFormStateChange($event)"></app-login>
+  } @else {
+    <app-register (authFormStateChange)="onAuthFormStateChange($event)"></app-register>
+  }
+  <div class="image-container">
+    <img src="assets/images/productivity.png" alt="Productivity"/>
+  </div>
+</div>

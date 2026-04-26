@@ -1,0 +1,22 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.app-btn {
+  color: white !important;
+  background-color: #101010 !important;
+}
+
+.app-btn-inverted {
+  color: white !important;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
