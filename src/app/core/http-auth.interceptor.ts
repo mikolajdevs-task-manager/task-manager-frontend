@@ -24,10 +24,10 @@ export class HttpAuthInterceptor implements HttpInterceptor {
           if (!(error instanceof HttpErrorResponse)) {
             console.error('Interceptor error:', error);
           }
-          if (error.status === 401) {
-            this.authService.logout();
-            return;
-          }
+          // if (error.status === 401) {
+          //   this.authService.logout();
+          //   return;
+          // }
           this.errorHandler.handleError(error);
         }
       })

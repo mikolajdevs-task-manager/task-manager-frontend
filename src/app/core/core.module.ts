@@ -1,6 +1,5 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { AuthService } from '@core/auth.service';
 import { HttpAuthInterceptor } from '@core/http-auth.interceptor';
 import { TranslateModule } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -15,7 +14,6 @@ const version = packageJson.version;
     })
   ],
   providers: [
-    { provide: AuthService },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpAuthInterceptor,
