@@ -1,54 +1,56 @@
-import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, tap} from 'rxjs';
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {AppPath} from '../app-routing.model';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { AppPath } from '../app-routing.model';
 
 export interface AuthRequest {
-  email: string,
-  password: string
+  email: string;
+  password: string;
 }
 
 export interface User {
-  email: string,
-  id: string
+  email: string;
+  id: string;
 }
 
 export interface Authentication {
-  token: string,
-  user: User
+  token: string;
+  user: User;
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
   private readonly TOKEN_KEY = 'jwt';
-  private user = new BehaviorSubject<User | null>(null)
+  private user = new BehaviorSubject<User | null>(null);
   private _user$ = this.user.asObservable();
 
-  constructor(private httpClient: HttpClient, private router: Router) {
-  }
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router
+  ) {}
 
   public login(request: AuthRequest): Observable<Authentication> {
-    return this.httpClient.post<Authentication>('/login', request).pipe(tap(
-      (response) => {
-        console.log(response)
+    return this.httpClient.post<Authentication>('/login', request).pipe(
+      tap((response) => {
+        console.log(response);
         localStorage.setItem(this.TOKEN_KEY, response.token);
         this.storeUser(response.user);
         this.router.navigate([AppPath.dashboard]);
-      }
-    ));
+      })
+    );
   }
 
   public register(request: AuthRequest): Observable<Authentication> {
-    return this.httpClient.post<Authentication>('/register', request).pipe(tap(
-      (response) => {
+    return this.httpClient.post<Authentication>('/register', request).pipe(
+      tap((response) => {
         localStorage.setItem(this.TOKEN_KEY, response.token);
         this.storeUser(response.user);
         this.router.navigate([AppPath.dashboard]);
-      }
-    ));
+      })
+    );
   }
 
   public getUser(): Observable<User> {
@@ -71,7 +73,7 @@ export class AuthService {
   }
 
   private storeUser(user: User): void {
-    this.user.next(user)
+    this.user.next(user);
   }
 
   private redirect(url: string): void {

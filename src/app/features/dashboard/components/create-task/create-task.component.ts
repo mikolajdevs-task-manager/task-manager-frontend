@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, HostListener, Output,} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Task} from '@model/task.model';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Task } from '@model/task.model';
 
 @Component({
   selector: 'app-create-task',
@@ -14,7 +14,7 @@ export class CreateTaskComponent {
 
   protected form = new FormGroup({
     title: new FormControl(null, [Validators.required]),
-    description: new FormControl(null, [Validators.required]),
+    description: new FormControl(null, [Validators.required])
   });
 
   protected get title(): FormControl {
@@ -35,7 +35,7 @@ export class CreateTaskComponent {
       const task = {
         title: this.title.value,
         description: this.description.value,
-        done: false,
+        done: false
       } as Task;
       this.form.reset();
       this.onCreate.emit(task);

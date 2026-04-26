@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {WeatherService} from '../../../../services/weather.service';
-import {BehaviorSubject} from 'rxjs';
-import {Weather} from '@model/weather.model';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Weather } from '@model/weather.model';
+import { BehaviorSubject } from 'rxjs';
+import { WeatherService } from '../../../../services/weather.service';
 
 @Component({
   selector: 'app-weather',
@@ -16,8 +16,7 @@ export class WeatherComponent implements OnInit {
 
   protected alertState = new BehaviorSubject<boolean>(true);
 
-  constructor(private weatherService: WeatherService) {
-  }
+  constructor(private weatherService: WeatherService) {}
 
   public ngOnInit(): void {
     this.weatherService.getWeather().subscribe(this.weather);

@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, HostListener, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '@core/auth.service';
-import {AuthFormState} from '@features/auth/containers/auth/auth.component';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '@core/auth.service';
+import { AuthFormState } from '@features/auth/containers/auth/auth.component';
 
 @Component({
   selector: 'app-login',
@@ -17,11 +17,10 @@ export class LoginComponent {
 
   protected form = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [Validators.required]),
+    password: new FormControl(null, [Validators.required])
   });
 
-  constructor(private authService: AuthService) {
-  }
+  constructor(private authService: AuthService) {}
 
   protected get email(): FormControl {
     return this.form.get('email') as FormControl;
@@ -38,7 +37,7 @@ export class LoginComponent {
 
   protected submit(): void {
     if (this.form.invalid) return;
-    const {email, password} = this.form.value as any;
-    this.authService.login({email, password}).subscribe();
+    const { email, password } = this.form.value as any;
+    this.authService.login({ email, password }).subscribe();
   }
 }

@@ -1,16 +1,15 @@
-import {Injectable} from '@angular/core';
-import {Observable, switchMap} from 'rxjs';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Coordinates, Weather} from '@model/weather.model';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Coordinates, Weather } from '@model/weather.model';
+import { Observable, switchMap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class WeatherService {
   private apiUrl = '/api/weather';
 
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
   public getWeather(): Observable<Weather> {
     return this.getCoordinates().pipe(
@@ -18,7 +17,7 @@ export class WeatherService {
         const params = new HttpParams()
           .set('latitude', coordinates.latitude.toString())
           .set('longitude', coordinates.longitude.toString());
-        return this.httpClient.get<Weather>(this.apiUrl, {params});
+        return this.httpClient.get<Weather>(this.apiUrl, { params });
       })
     );
   }
@@ -34,7 +33,7 @@ export class WeatherService {
         (position) => {
           observer.next({
             latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
+            longitude: position.coords.longitude
           });
           observer.complete();
         },

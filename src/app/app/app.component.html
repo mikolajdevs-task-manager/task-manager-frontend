@@ -1,16 +1,16 @@
 <header>
   <div class="container">
     <a href="/">
-      <mat-icon aria-hidden="false" fontIcon="spa"></mat-icon>
+      <mat-icon fontIcon="spa" aria-hidden="false"></mat-icon>
       Goally
     </a>
     <ng-container *ngIf="user$ | async as user">
       <div class="user-details">
         <div class="user">
-          <mat-icon aria-hidden="false" fontIcon="account_circle"></mat-icon>
+          <mat-icon fontIcon="account_circle" aria-hidden="false"></mat-icon>
           {{ user.email }}
         </div>
-        <button (click)="authService.logout()" mat-icon-button>
+        <button mat-icon-button (click)="authService.logout()">
           <mat-icon>logout</mat-icon>
         </button>
       </div>

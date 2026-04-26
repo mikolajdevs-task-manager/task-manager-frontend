@@ -1,13 +1,13 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {AppComponent} from './app/app.component';
-import {provideHttpClient, withInterceptorsFromDi,} from '@angular/common/http';
-import {TasksService} from './services/tasks.service';
-import {AppRoutingModule} from './app-routing.module';
-import {SharedModule} from '@shared/shared.module';
-import {CoreModule} from '@core/core.module';
-import {WeatherService} from './services/weather.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from '@core/core.module';
+import { SharedModule } from '@shared/shared.module';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app/app.component';
+import { TasksService } from './services/tasks.service';
+import { WeatherService } from './services/weather.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +22,6 @@ import {WeatherService} from './services/weather.service';
     SharedModule
   ],
   providers: [provideHttpClient(withInterceptorsFromDi()), TasksService, WeatherService],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}

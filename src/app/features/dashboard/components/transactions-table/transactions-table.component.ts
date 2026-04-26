@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
-import {Transaction} from '@model/transaction.model';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Transaction } from '@model/transaction.model';
 
 enum TableColumn {
   id = 'id',
@@ -15,8 +15,8 @@ const TABLE_COLUMNS = [
   TableColumn.date,
   TableColumn.currency,
   TableColumn.category,
-  TableColumn.amount,
-]
+  TableColumn.amount
+];
 
 @Component({
   selector: 'app-transactions-table',
@@ -40,5 +40,4 @@ export class TransactionsTableComponent {
   onDelete(taskId: number): void {
     this.delete.emit(taskId);
   }
-
 }

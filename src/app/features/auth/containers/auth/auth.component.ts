@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 export enum AuthFormState {
   LOGIN = 'LOGIN',
-  REGISTER = 'REGISTER',
+  REGISTER = 'REGISTER'
 }
 
 @Component({

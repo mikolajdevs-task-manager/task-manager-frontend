@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {AuthService} from '@core/auth.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AuthService } from '@core/auth.service';
 
 @Component({
   selector: 'app-root',
