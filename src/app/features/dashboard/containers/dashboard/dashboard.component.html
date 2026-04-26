@@ -11,7 +11,7 @@
 
   <div *ngIf="transactions$ | async as transactions">
     <h2 class="panel-title">
-      Your transactions ({{ transactions.length }})
+      {{ 'tasks.title' | translate }} ({{ transactions.length }})
       <ng-container *ngTemplateOutlet="loader"></ng-container>
     </h2>
     <app-transactions-table [transactions]="transactions"></app-transactions-table>

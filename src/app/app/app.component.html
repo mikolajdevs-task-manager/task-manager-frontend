@@ -2,7 +2,7 @@
   <div class="container">
     <a href="/">
       <mat-icon fontIcon="spa" aria-hidden="false"></mat-icon>
-      Goally
+      {{ 'theme.title' | translate }}
     </a>
     <ng-container *ngIf="user$ | async as user">
       <div class="user-details">
