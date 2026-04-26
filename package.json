@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "dev": "ng serve -c development --proxy-config=proxy-dev.conf.js --host 0.0.0.0 --port=4443",
+    "dev": "ng serve -c development --proxy-config=proxy-dev.conf.js --host 0.0.0.0 --port=4443 --ssl --ssl-key=devenv/dev.key --ssl-cert=devenv/dev.crt",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
