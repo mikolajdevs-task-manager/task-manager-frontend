@@ -20,6 +20,7 @@ import {
   MatRowDef,
   MatTable
 } from '@angular/material/table';
+import { TranslateModule } from '@ngx-translate/core';
 import { FormatDateTimePipe } from '@shared/pipe/format-date-time.pipe';
 
 const materialModules = [
@@ -54,7 +55,7 @@ const materialModules = [
 
 @NgModule({
   declarations: [FormatDateTimePipe],
-  imports: [...materialModules, AsyncPipe, NgIf, NgTemplateOutlet, JsonPipe, LowerCasePipe],
-  exports: [...materialModules, AsyncPipe, NgIf, NgTemplateOutlet, JsonPipe, LowerCasePipe, FormatDateTimePipe]
+  imports: [...materialModules, AsyncPipe, NgIf, NgTemplateOutlet, JsonPipe, LowerCasePipe, TranslateModule],
+  exports: [...materialModules, AsyncPipe, NgIf, NgTemplateOutlet, JsonPipe, LowerCasePipe, FormatDateTimePipe, TranslateModule]
 })
 export class SharedModule {}
