@@ -20,6 +20,7 @@ import {
   MatRowDef,
   MatTable
 } from '@angular/material/table';
+import { MatTooltip } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormatDateTimePipe } from '@shared/pipe/format-date-time.pipe';
 
@@ -50,7 +51,8 @@ const materialModules = [
   MatCardHeader,
   MatIconButton,
   MatProgressSpinner,
-  MatError
+  MatError,
+  MatTooltip
 ];
 
 @NgModule({

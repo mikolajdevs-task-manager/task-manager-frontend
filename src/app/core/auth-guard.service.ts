@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
-import { AuthService } from '@core/auth.service';
-import { Observable, of } from 'rxjs';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuardService implements CanActivate {
-  constructor(private authService: AuthService) {}
+  constructor(private oauthService: OAuthService) {}
 
-  canActivate(): Observable<boolean> {
-    // return this.authService.getUser().pipe(map(user => !!user));
-    return of(true);
+  canActivate(): boolean {
+    if (this.oauthService.hasValidAccessToken()) {
+      return true;
+    }
+    this.oauthService.initCodeFlow();
+    return false;
   }
 }

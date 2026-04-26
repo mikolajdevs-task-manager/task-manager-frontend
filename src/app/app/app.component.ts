@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AuthService } from '@core/auth.service';
+import { IdentityClaims } from '@model/auth.model';
 import { TranslateService } from '@ngx-translate/core';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-root',
@@ -10,17 +11,21 @@ import { TranslateService } from '@ngx-translate/core';
   standalone: false
 })
 export class AppComponent {
-  protected user$;
-
   constructor(
     private translateService: TranslateService,
-    protected authService: AuthService
-  ) {
-    this.user$ = this.authService.user$;
-  }
+    private oauthService: OAuthService
+  ) {}
 
   public ngOnInit(): void {
     this.translateService.setFallbackLang('en');
     this.translateService.use('en');
+  }
+
+  protected logout(): void {
+    this.oauthService.logOut();
+  }
+
+  protected get identityClaims(): IdentityClaims | null {
+    return (this.oauthService.getIdentityClaims() as IdentityClaims) ?? null;
   }
 }

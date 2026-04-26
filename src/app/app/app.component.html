@@ -4,17 +4,17 @@
       <mat-icon fontIcon="spa" aria-hidden="false"></mat-icon>
       {{ 'theme.title' | translate }}
     </a>
-    <ng-container *ngIf="user$ | async as user">
+    @if (identityClaims) {
       <div class="user-details">
         <div class="user">
-          <mat-icon fontIcon="account_circle" aria-hidden="false"></mat-icon>
-          {{ user.email }}
+          <mat-icon fontIcon="account_circle" [matTooltip]="identityClaims.email" aria-hidden="false"></mat-icon>
+          {{ identityClaims.name || identityClaims.preferred_username }}
         </div>
-        <button mat-icon-button (click)="authService.logout()">
+        <button mat-icon-button (click)="logout()">
           <mat-icon>logout</mat-icon>
         </button>
       </div>
-    </ng-container>
+      }
   </div>
 </header>
 <div class="container-wrapper">
