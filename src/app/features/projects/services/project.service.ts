@@ -6,7 +6,7 @@ import { ProjectApiService } from '@features/projects/services/project-api.servi
 import { Project, ProjectSummary } from '@model/project.model';
 import { Task } from '@model/task.model';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
-import { EMPTY, filter, first, Observable, switchMap, tap } from 'rxjs';
+import { EMPTY, filter, finalize, first, Observable, switchMap, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,7 @@ export class ProjectService {
   public readonly projects = this._projects.asReadonly();
   public readonly project = this._project.asReadonly();
   public readonly projectsLoading = this._projectsLoading.asReadonly();
+  public readonly operationLoading = signal(false);
 
   constructor(
     private api: ProjectApiService,
@@ -79,12 +80,14 @@ export class ProjectService {
       .pipe(
         first(),
         filter((confirmed): confirmed is true => confirmed === true),
+        tap(() => this.operationLoading.set(true)),
         switchMap(() => this.api.deleteProject$(project.id)),
         tap(() => {
           this._projects.update((list) => list.filter((p) => p.id !== project.id));
           this._project.set(null);
           this.loadProjects();
-        })
+        }),
+        finalize(() => this.operationLoading.set(false))
       );
   }
 
@@ -97,11 +100,13 @@ export class ProjectService {
       .pipe(
         first(),
         filter((response): response is { name: string; description: string } => !!response),
+        tap(() => this.operationLoading.set(true)),
         switchMap(({ name, description }) => this.api.updateProject$(project.id, { name, description })),
         tap((updated) => {
           this._project.set(updated);
           this.loadProjects();
-        })
+        }),
+        finalize(() => this.operationLoading.set(false))
       );
   }
 
@@ -112,11 +117,13 @@ export class ProjectService {
       .pipe(
         first(),
         filter((response): response is { name: string; description: string } => !!response),
+        tap(() => this.operationLoading.set(true)),
         switchMap(({ name, description }) => this.api.createProject$(name, description)),
         tap((project) => {
           this._project.set(project);
           this.loadProjects();
-        })
+        }),
+        finalize(() => this.operationLoading.set(false))
       );
   }
 }

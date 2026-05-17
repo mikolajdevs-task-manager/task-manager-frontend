@@ -3,8 +3,6 @@ import { ProjectService } from '@features/projects/services/project.service';
 import { TaskService } from '@features/projects/services/task.service';
 import { Project } from '@model/project.model';
 import { Task, TaskStatus } from '@model/task.model';
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-project',
@@ -17,8 +15,9 @@ export class ProjectComponent {
   protected project: Signal<Project>;
   protected projects: ProjectService['projects'];
   protected projectsLoading: ProjectService['projectsLoading'];
+  protected taskLoading: TaskService['loading'];
+  protected projectOperationLoading: ProjectService['operationLoading'];
   protected menuOpen = signal(false);
-  protected operationLoading = signal(false);
 
   constructor(
     private projectService: ProjectService,
@@ -27,10 +26,12 @@ export class ProjectComponent {
     this.project = this.projectService.project as Signal<Project>;
     this.projects = this.projectService.projects;
     this.projectsLoading = this.projectService.projectsLoading;
+    this.taskLoading = this.taskService.loading;
+    this.projectOperationLoading = this.projectService.operationLoading;
   }
 
   protected get isLoading(): boolean {
-    return this.projectsLoading() || this.operationLoading();
+    return this.projectsLoading() || this.taskLoading() || this.projectOperationLoading();
   }
 
   protected toggleMenu(event: MouseEvent): void {
@@ -44,36 +45,31 @@ export class ProjectComponent {
   }
 
   protected onTaskCreate(): void {
-    this.run(this.taskService.addTask$());
+    this.taskService.addTask$().subscribe();
   }
 
   protected onTaskEdit(task: Task): void {
-    this.run(this.taskService.editTask$(task));
+    this.taskService.editTask$(task).subscribe();
   }
 
   protected onTaskMove(taskId: number, status: TaskStatus): void {
-    this.run(this.taskService.moveTask$(taskId, status));
+    this.taskService.moveTask$(taskId, status).subscribe();
   }
 
   protected onTaskDelete(task: Task): void {
-    this.run(this.taskService.removeTask$(task));
+    this.taskService.removeTask$(task).subscribe();
   }
 
   protected openCreateProject(): void {
-    this.run(this.projectService.createProject$());
+    this.projectService.createProject$().subscribe();
   }
 
   protected openEditProject(): void {
-    this.run(this.projectService.editProject$());
+    this.projectService.editProject$().subscribe();
   }
 
   protected deleteProject(): void {
     this.menuOpen.set(false);
-    this.run(this.projectService.deleteProject$());
-  }
-
-  private run(obs$: Observable<unknown>): void {
-    this.operationLoading.set(true);
-    obs$.pipe(finalize(() => this.operationLoading.set(false))).subscribe();
+    this.projectService.deleteProject$().subscribe();
   }
 }
