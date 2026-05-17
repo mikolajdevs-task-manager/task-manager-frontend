@@ -1,3 +1,9 @@
+@if (isLoading) {
+  <div class="board-overlay">
+    <mat-spinner diameter="32"></mat-spinner>
+  </div>
+}
+
 @if (project()) {
   <header class="topbar">
     <div class="topbar-info">
@@ -53,11 +59,15 @@
   </div>
 } @else {
   <div class="empty-state">
-    <p class="empty-title">No project selected</p>
-    <p class="empty-sub">Create your first project to get started</p>
-    <button class="create-btn" (click)="openCreateProject()">
-      <mat-icon>create_new_folder</mat-icon>
-      Create project
-    </button>
+    @if (projectsLoading()) {
+      <mat-spinner diameter="28"></mat-spinner>
+    } @else if (projects().length === 0) {
+      <p class="empty-title">No projects yet</p>
+      <p class="empty-sub">Create your first project to get started</p>
+      <button class="create-btn" (click)="openCreateProject()">
+        <mat-icon>create_new_folder</mat-icon>
+        Create project
+      </button>
+    }
   </div>
 }
