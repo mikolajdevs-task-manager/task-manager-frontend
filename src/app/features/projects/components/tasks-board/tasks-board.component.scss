@@ -67,7 +67,7 @@
   border-top: 1px solid var(--q-border);
   border-radius: 0 0 10px 10px;
   background: transparent;
-  color: var(--q-text-lo);
+  color: var(--q-accent);
   font-size: 12px;
   font-family: 'Geist', sans-serif;
   transition: background 0.12s, color 0.12s;
@@ -75,7 +75,7 @@
 
   &:hover {
     background: var(--q-surface-alt);
-    color: var(--q-text-md);
+    color: var(--q-accent-2);
   }
 }
 
@@ -86,6 +86,7 @@
 }
 
 .col-body {
+  height: 100%;
   padding: 8px;
   display: flex;
   flex-direction: column;
