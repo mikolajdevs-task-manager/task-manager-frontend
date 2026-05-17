@@ -58,24 +58,24 @@
 }
 
 .col-add {
-  margin-left: auto;
-  width: 22px;
-  height: 22px;
-  border-radius: 5px;
-  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  padding: 8px 12px;
   border: none;
-  cursor: pointer;
+  border-top: 1px solid var(--q-border);
+  border-radius: 0 0 10px 10px;
+  background: transparent;
   color: var(--q-text-lo);
-  padding: 0;
-  display: grid;
-  place-items: center;
-  transition:
-    color 0.12s,
-    background 0.12s;
+  font-size: 12px;
+  font-family: 'Geist', sans-serif;
+  transition: background 0.12s, color 0.12s;
+  cursor: pointer;
 
   &:hover {
-    color: var(--q-text-hi);
-    background: var(--q-border);
+    background: var(--q-surface-alt);
+    color: var(--q-text-md);
   }
 }
 
@@ -94,6 +94,11 @@
 
 // Task card — zero layout shift on hover
 .task-card {
+  appearance: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-size: inherit;
   position: relative;
   background: var(--q-surface);
   border: 1px solid var(--q-border);

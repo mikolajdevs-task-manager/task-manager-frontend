@@ -6,14 +6,11 @@
           <span class="col-dot" [style.background]="dotColor(col.status)"></span>
           <span class="col-label">{{ col.label }}</span>
           <span class="col-count">{{ tasksFor(col.status).length }}</span>
-          <button class="col-add" matTooltip="Add task" (click)="create.emit()">
-            <mat-icon class="col-add-icon">add</mat-icon>
-          </button>
         </div>
 
         <div class="col-body">
           @for (task of tasksFor(col.status); track task.id) {
-            <div class="task-card" [class.selected]="selectedTask()?.id === task.id" (click)="selectTask(task)">
+            <button type="button" class="task-card" [class.selected]="selectedTask()?.id === task.id" (click)="selectTask(task)">
               <span class="card-accent"></span>
               <div class="card-title">{{ task.title }}</div>
               <div class="card-desc">{{ task.description }}</div>
@@ -23,13 +20,16 @@
                   <mat-icon>chevron_right</mat-icon>
                 </span>
               </div>
-            </div>
-          }
-
-          @if (tasksFor(col.status).length === 0) {
-            <div class="empty-col">No tasks</div>
+            </button>
           }
         </div>
+
+        @if (col.status === TaskStatus.TODO) {
+          <button class="col-add" (click)="create.emit()">
+            <mat-icon class="col-add-icon">add</mat-icon>
+            Add task
+          </button>
+        }
       </div>
     }
   </div>

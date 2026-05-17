@@ -42,13 +42,13 @@
 
   <div class="board-container">
     @if (project().tasks) {
-      <app-tasks-table
+      <app-tasks-board
         [tasks]="project().tasks"
         (create)="onTaskCreate()"
         (delete)="onTaskDelete($event)"
         (edit)="onTaskEdit($event)"
         (move)="onTaskMove($event.task.id, $event.status)"
-      ></app-tasks-table>
+      ></app-tasks-board>
     }
   </div>
 } @else {

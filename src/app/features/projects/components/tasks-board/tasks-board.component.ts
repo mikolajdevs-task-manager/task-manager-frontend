@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, signal
 import { Task, TaskStatus } from '@model/task.model';
 
 @Component({
-  selector: 'app-tasks-table',
-  templateUrl: './tasks-table.component.html',
-  styleUrl: './tasks-table.component.scss',
+  selector: 'app-tasks-board',
+  templateUrl: './tasks-board.component.html',
+  styleUrl: './tasks-board.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
-export class TasksTableComponent {
+export class TasksBoardComponent {
   @Input() tasks: Task[] = [];
   @Output() create = new EventEmitter<void>();
   @Output() edit = new EventEmitter<Task>();
@@ -26,18 +26,6 @@ export class TasksTableComponent {
 
   protected tasksFor(status: TaskStatus): Task[] {
     return this.tasks.filter((t) => t.status === status);
-  }
-
-  protected prevStatus(status: TaskStatus): TaskStatus | null {
-    if (status === TaskStatus.IN_PROGRESS) return TaskStatus.TODO;
-    if (status === TaskStatus.DONE) return TaskStatus.IN_PROGRESS;
-    return null;
-  }
-
-  protected nextStatus(status: TaskStatus): TaskStatus | null {
-    if (status === TaskStatus.TODO) return TaskStatus.IN_PROGRESS;
-    if (status === TaskStatus.IN_PROGRESS) return TaskStatus.DONE;
-    return null;
   }
 
   protected selectTask(task: Task): void {

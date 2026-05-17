@@ -3,7 +3,7 @@ import { CreateProjectComponent } from '@features/projects/components/create-pro
 import { CreateTaskComponent } from '@features/projects/components/create-task/create-task.component';
 import { EditProjectComponent } from '@features/projects/components/edit-project/edit-project.component';
 import { EditTaskComponent } from '@features/projects/components/edit-task/edit-task.component';
-import { TasksTableComponent } from '@features/projects/components/tasks-table/tasks-table.component';
+import { TasksBoardComponent } from '@features/projects/components/tasks-board/tasks-board.component';
 import { ProjectBoardComponent } from '@features/projects/containers/project-board/project-board.component';
 import { ProjectsRoutingModule } from '@features/projects/projects-routing.module';
 import { SharedModule } from '@shared/shared.module';
@@ -15,7 +15,7 @@ import { SharedModule } from '@shared/shared.module';
     CreateTaskComponent,
     EditProjectComponent,
     EditTaskComponent,
-    TasksTableComponent
+    TasksBoardComponent
   ],
   imports: [SharedModule, ProjectsRoutingModule]
 })
