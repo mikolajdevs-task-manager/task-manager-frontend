@@ -4,13 +4,13 @@ import { CreateTaskComponent } from '@features/projects/components/create-task/c
 import { EditProjectComponent } from '@features/projects/components/edit-project/edit-project.component';
 import { EditTaskComponent } from '@features/projects/components/edit-task/edit-task.component';
 import { TasksBoardComponent } from '@features/projects/components/tasks-board/tasks-board.component';
-import { ProjectBoardComponent } from '@features/projects/containers/project-board/project-board.component';
+import { ProjectComponent } from '@features/projects/containers/project/project.component';
 import { ProjectsRoutingModule } from '@features/projects/projects-routing.module';
 import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
-    ProjectBoardComponent,
+    ProjectComponent,
     CreateProjectComponent,
     CreateTaskComponent,
     EditProjectComponent,

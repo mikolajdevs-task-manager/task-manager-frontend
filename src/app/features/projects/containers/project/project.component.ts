@@ -5,13 +5,13 @@ import { Project } from '@model/project.model';
 import { Task, TaskStatus } from '@model/task.model';
 
 @Component({
-  selector: 'app-project-board',
-  templateUrl: './project-board.component.html',
-  styleUrl: './project-board.component.scss',
+  selector: 'app-project',
+  templateUrl: './project.component.html',
+  styleUrl: './project.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
-export class ProjectBoardComponent {
+export class ProjectComponent {
   protected project: Signal<Project>;
   protected menuOpen = signal(false);
 
