@@ -1,6 +1,6 @@
 @if (isAuthenticated) {
   <div class="app-container">
-    <app-drawer
+    <app-sidenav
       [identityClaims]="identityClaims"
       [project]="project()"
       [projects]="projects()"
@@ -8,7 +8,7 @@
       (logOut)="logOut()"
       (projectChange)="onProjectChange($event)"
       (projectCreate)="onProjectCreate()"
-    ></app-drawer>
+    ></app-sidenav>
     <div class="content">
       <router-outlet></router-outlet>
     </div>

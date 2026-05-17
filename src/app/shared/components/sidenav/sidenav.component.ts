@@ -5,16 +5,16 @@ import { ProjectSummary } from '@model/project.model';
 import { UserDialogComponent } from '@shared/components/user-dialog/user-dialog.component';
 import { getLocalStorage, setLocalStorage } from '@shared/util/localStorage.utils';
 
-const DRAWER_KEY = 'DRAWER';
+const SIDENAV_KEY = 'SIDENAV';
 
 @Component({
-  selector: 'app-drawer',
-  templateUrl: './drawer.html',
-  styleUrl: './drawer.scss',
+  selector: 'app-sidenav',
+  templateUrl: './sidenav.component.html',
+  styleUrl: './sidenav.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
-export class Drawer {
+export class Sidenav {
   public identityClaims = input.required<IdentityClaims>();
   public projects = input.required<ProjectSummary[]>();
   public projectsLoading = input.required<boolean>();
@@ -24,14 +24,14 @@ export class Drawer {
   public projectChange = output<ProjectSummary>();
   public projectCreate = output<void>();
 
-  protected isOpened = signal<boolean>(getLocalStorage<boolean>(DRAWER_KEY) ?? true);
+  protected isOpened = signal<boolean>(getLocalStorage<boolean>(SIDENAV_KEY) ?? true);
 
   constructor(private dialog: MatDialog) {}
 
   public toggle(): void {
     const isOpened = !this.isOpened();
     this.isOpened.set(isOpened);
-    setLocalStorage(DRAWER_KEY, isOpened);
+    setLocalStorage(SIDENAV_KEY, isOpened);
   }
 
   public get opened(): boolean {
