@@ -1,24 +1,400 @@
+// ── Design tokens — "Quiet" variation ──────────────────────────────────
+:root {
+  --q-bg: oklch(98.5% 0.003 250);
+  --q-surface: #ffffff;
+  --q-surface-alt: oklch(97% 0.003 250);
+  --q-border: oklch(92.5% 0.005 250);
+  --q-border-str: oklch(88% 0.006 250);
+  --q-text-hi: oklch(22% 0.012 250);
+  --q-text-md: oklch(45% 0.012 250);
+  --q-text-lo: oklch(60% 0.01 250);
+  --q-side-bg: oklch(20% 0.012 250);
+  --q-side-txt: oklch(78% 0.01 250);
+  --q-side-hi: #ffffff;
+  --q-side-hover: oklch(26% 0.014 250);
+  --q-side-active: oklch(30% 0.018 250);
+  --q-todo-dot: oklch(70% 0.015 250);
+  --q-prog-dot: oklch(62% 0.16 250);
+  --q-done-dot: oklch(62% 0.13 150);
+  --q-accent: oklch(55% 0.18 250);
+}
+
 html,
 body {
   height: 100%;
+  background: var(--q-bg);
 }
 
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
-
-.app-btn {
-  color: white !important;
-  background-color: #101010 !important;
-}
-
-.app-btn-inverted {
-  color: white !important;
+  font-family:
+    'Geist',
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
+  font-size: 13px;
+  color: var(--q-text-hi);
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+// ── Material dialog container ────────────────────────────────────────────
+.mdc-dialog .mdc-dialog__surface {
+  border-radius: 12px !important;
+  box-shadow:
+    0 24px 60px rgba(15, 23, 42, 0.22),
+    0 0 0 1px var(--q-border) !important;
+  overflow: hidden !important;
+  font-family: 'Geist', sans-serif !important;
+}
+
+// Suppress Material's own dialog chrome — we use .tm-* instead
+.mat-mdc-dialog-title {
+  display: none !important;
+}
+.mat-mdc-dialog-actions {
+  display: none !important;
+}
+
+.mat-mdc-dialog-content {
+  min-width: 432px !important;
+  padding: 14px 16px 12px !important;
+  font-family: 'Geist', sans-serif !important;
+  font-size: 13px !important;
+  color: var(--q-text-md) !important;
+  line-height: 1.5 !important;
+  max-height: 480px !important;
+}
+
+// ── TMModal chrome ────────────────────────────────────────────────────────
+.tm-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--q-border);
+}
+
+.tm-icon-wrap {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  background: oklch(95% 0.012 250);
+  color: var(--q-text-md);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+
+  &.destructive {
+    background: oklch(95% 0.04 25);
+    color: oklch(50% 0.18 25);
+  }
+
+  mat-icon {
+    font-size: 15px !important;
+    width: 15px !important;
+    height: 15px !important;
+  }
+}
+
+.tm-title-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.tm-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--q-text-lo);
+}
+
+.tm-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--q-text-hi);
+  letter-spacing: -0.2px;
+  line-height: 1.3;
+}
+
+.user-dialog-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: oklch(35% 0.02 250);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.tm-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--q-surface);
+  border: 1px solid var(--q-border);
+  cursor: pointer;
+  color: var(--q-text-md);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  padding: 0;
+  transition:
+    border-color 0.12s,
+    color 0.12s;
+
+  mat-icon {
+    font-size: 14px !important;
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  &:hover {
+    border-color: var(--q-border-str);
+    color: var(--q-text-hi);
+  }
+}
+
+.tm-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tm-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 18px 14px;
+  border-top: 1px solid var(--q-border);
+  background: var(--q-surface-alt);
+}
+
+// ── Buttons ───────────────────────────────────────────────────────────────
+.tm-btn-ghost {
+  height: 32px;
+  padding: 0 13px;
+  border-radius: 7px;
+  background: transparent;
+  border: 1px solid var(--q-border);
+  color: var(--q-text-hi);
+  font-family: 'Geist', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.12s;
+
+  &:hover {
+    border-color: var(--q-border-str);
+  }
+}
+
+.tm-btn-primary {
+  height: 32px;
+  padding: 0 13px;
+  border-radius: 7px;
+  background: var(--q-text-hi);
+  border: none;
+  color: #fff;
+  font-family: 'Geist', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 0.12s;
+
+  mat-icon {
+    font-size: 14px !important;
+    width: 14px !important;
+    height: 14px !important;
+  }
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.tm-btn-danger {
+  height: 32px;
+  padding: 0 13px;
+  border-radius: 7px;
+  background: oklch(54% 0.2 25);
+  border: none;
+  color: #fff;
+  font-family: 'Geist', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 0.12s;
+
+  mat-icon {
+    font-size: 14px !important;
+    width: 14px !important;
+    height: 14px !important;
+  }
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+// ── Form fields ───────────────────────────────────────────────────────────
+.tm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tm-field-row {
+  display: grid;
+  gap: 10px;
+}
+
+.tm-label {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--q-text-hi);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tm-req {
+  color: oklch(54% 0.18 25);
+  font-weight: 600;
+}
+
+.tm-input {
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 7px;
+  border: 1px solid var(--q-border-str);
+  background: var(--q-surface);
+  font-family: 'Geist', sans-serif;
+  font-size: 13px;
+  color: var(--q-text-hi);
+  outline: none;
+  width: 100%;
+  transition:
+    border-color 0.12s,
+    box-shadow 0.12s;
+
+  &:focus {
+    border-color: oklch(60% 0.16 250);
+    box-shadow: 0 0 0 3px oklch(92% 0.06 250 / 50%);
+  }
+}
+
+.tm-textarea {
+  min-height: 72px;
+  padding: 8px 10px;
+  border-radius: 7px;
+  border: 1px solid var(--q-border-str);
+  background: var(--q-surface);
+  font-family: 'Geist', sans-serif;
+  font-size: 13px;
+  color: var(--q-text-hi);
+  outline: none;
+  width: 100%;
+  resize: vertical;
+  line-height: 1.5;
+  transition:
+    border-color 0.12s,
+    box-shadow 0.12s;
+
+  &:focus {
+    border-color: oklch(60% 0.16 250);
+    box-shadow: 0 0 0 3px oklch(92% 0.06 250 / 50%);
+  }
+}
+
+.tm-input-ro {
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 7px;
+  border: 1px solid var(--q-border);
+  background: var(--q-surface-alt);
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  color: var(--q-text-lo);
+  outline: none;
+  width: 100%;
+}
+
+.tm-error {
+  font-size: 11px;
+  color: oklch(54% 0.18 25);
+}
+
+// ── Status picker ─────────────────────────────────────────────────────────
+.tm-status-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tm-status-btn {
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 7px;
+  background: var(--q-surface);
+  border: 1px solid var(--q-border);
+  color: var(--q-text-md);
+  font-family: 'Geist', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition:
+    background 0.12s,
+    border-color 0.12s,
+    color 0.12s;
+
+  &.active {
+    background: var(--q-surface-alt);
+    border-color: var(--q-border-str);
+    color: var(--q-text-hi);
+    font-weight: 500;
+  }
+}
+
+.tm-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+// ── Danger note ───────────────────────────────────────────────────────────
+.tm-danger-note {
+  background: oklch(97% 0.03 25);
+  border: 1px solid oklch(90% 0.05 25);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: oklch(38% 0.12 25);
+  line-height: 1.5;
+}
+
+.tm-body-text {
+  font-size: 13px;
+  color: var(--q-text-md);
+  line-height: 1.5;
 }

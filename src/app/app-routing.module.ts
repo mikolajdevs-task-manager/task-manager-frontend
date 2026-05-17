@@ -5,13 +5,13 @@ import { AppPath } from './app-routing.model';
 
 const routes: Routes = [
   {
-    path: AppPath.dashboard,
-    loadChildren: () => import('@features/dashboard/dashboard.module').then((m) => m.DashboardModule),
+    path: '',
+    loadChildren: () => import('@features/projects/projects-module').then((m) => m.ProjectsModule),
     canActivate: [AuthGuardService]
   },
   {
     path: '**',
-    redirectTo: AppPath.dashboard
+    redirectTo: AppPath.home
   }
 ];
 

@@ -11,15 +11,28 @@ const version = packageJson.version;
 
 function initializeOAuth(oauthService: OAuthService): () => Promise<void> {
   return () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       oauthService.configure(authCodeFlowConfig);
       oauthService.setupAutomaticSilentRefresh();
-      oauthService.loadDiscoveryDocumentAndLogin().then(() => {
-        if (window.location.search) {
-          window.history.replaceState({}, document.title, window.location.pathname);
-        }
-        resolve();
-      });
+
+      const params = new URLSearchParams(window.location.search);
+      if (window.location.search && !params.has('code')) {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+
+      oauthService
+        .loadDiscoveryDocumentAndLogin()
+        .then(() => {
+          if (window.location.search) {
+            window.history.replaceState({}, document.title, window.location.pathname);
+          }
+          resolve();
+        })
+        .catch(() => {
+          oauthService.logOut(true);
+          oauthService.initCodeFlow();
+          resolve();
+        });
     });
 }
 

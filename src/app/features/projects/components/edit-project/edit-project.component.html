@@ -1,0 +1,50 @@
+<div class="tm-header">
+  <span class="tm-icon-wrap">
+    <mat-icon>folder</mat-icon>
+  </span>
+  <div class="tm-title-col">
+    <span class="tm-eyebrow">Project</span>
+    <span class="tm-title">Edit project</span>
+  </div>
+  <button class="tm-close" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <form id="editProjectForm" class="tm-body" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="tm-field">
+      <label class="tm-label">
+        Name
+        <span class="tm-req">*</span>
+      </label>
+      <input class="tm-input" [formControl]="name" />
+      @if (name.touched && name.hasError('required')) {
+        <span class="tm-error">Name is required</span>
+      }
+    </div>
+    <div class="tm-field">
+      <label class="tm-label">Description</label>
+      <textarea class="tm-textarea" rows="3" [formControl]="description"></textarea>
+    </div>
+    <div class="tm-field-row" style="grid-template-columns: 1fr 1fr 2fr">
+      <div class="tm-field">
+        <label class="tm-label">Tasks</label>
+        <input class="tm-input-ro" readonly [value]="tasksCount" />
+      </div>
+      <div class="tm-field">
+        <label class="tm-label">ID</label>
+        <input class="tm-input-ro" readonly [value]="id" />
+      </div>
+      <div class="tm-field">
+        <label class="tm-label">Owner</label>
+        <input class="tm-input-ro" readonly [value]="ownerId" />
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<div class="tm-footer">
+  <button class="tm-btn-ghost" (click)="cancel()">Cancel</button>
+  <button class="tm-btn-primary" form="editProjectForm" type="submit">Save changes</button>
+</div>

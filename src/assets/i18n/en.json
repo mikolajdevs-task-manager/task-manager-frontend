@@ -1,6 +1,7 @@
 {
   "theme": {
-    "title": "Task manager"
+    "title": "Task manager",
+    "logout": "Logout"
   },
   "auth.common.email": "Email",
   "auth.common.password": "Password",

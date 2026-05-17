@@ -1,0 +1,56 @@
+<div class="drawer-inner" [class.opened]="isOpened()">
+  <a class="brand" href="/">
+    <span class="brand-dot">
+      <mat-icon class="brand-icon">check</mat-icon>
+    </span>
+    @if (isOpened()) {
+    <span class="brand-name">Task Manager</span>
+    }
+  </a>
+
+  <div class="nav-section">
+    @if (isOpened()) {
+    <div class="section-label">Projects</div>
+    } @if (projectsLoading()) {
+    <div class="nav-item">
+      <mat-spinner diameter="16"></mat-spinner>
+    </div>
+    } @else { @for (p of projects(); track p.id) {
+    <button
+      class="nav-item"
+      matTooltipPosition="right"
+      [class.active]="project()?.id === p.id"
+      [matTooltip]="isOpened() ? '' : p.name"
+      (click)="projectChange.emit(p)"
+    >
+      <mat-icon class="nav-icon">folder</mat-icon>
+      @if (isOpened()) {
+      <span class="nav-label">{{ p.name }}</span>
+      <span class="count-pill">{{ p.tasksCount }}</span>
+      }
+    </button>
+    } }
+
+    <button class="new-project-btn" matTooltipPosition="right" [matTooltip]="isOpened() ? '' : 'New project'" (click)="projectCreate.emit()">
+      <mat-icon class="nav-icon">add</mat-icon>
+      @if (isOpened()) {
+      <span>New project</span>
+      }
+    </button>
+  </div>
+
+  <div class="side-foot">
+    <button class="toggle-btn" matTooltipPosition="right" [matTooltip]="isOpened() ? '' : 'Expand'" (click)="toggle()">
+      <mat-icon class="nav-icon">{{ isOpened() ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+      @if (isOpened()) {
+      <span>Collapse</span>
+      }
+    </button>
+    <button class="user-row" matTooltipPosition="right" [matTooltip]="isOpened() ? '' : 'Account'" (click)="openUserDialog()">
+      <span class="user-avatar">{{ userInitial }}</span>
+      @if (isOpened()) {
+      <span class="user-name">{{ identityClaims().name || identityClaims().preferred_username }}</span>
+      }
+    </button>
+  </div>
+</div>

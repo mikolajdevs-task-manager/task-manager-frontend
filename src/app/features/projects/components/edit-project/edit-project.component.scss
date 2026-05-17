@@ -1,0 +1,13 @@
+form {
+  display: flex;
+  flex-direction: column;
+  min-width: 380px;
+  padding-top: 4px;
+  gap: 4px;
+
+  mat-form-field {
+    width: 100%;
+    font-family: 'Geist', sans-serif;
+    font-size: 13px;
+  }
+}

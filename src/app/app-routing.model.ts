@@ -1,3 +1,4 @@
 export const AppPath = {
-  dashboard: 'dashboard'
+  home: '',
+  projects: 'projects'
 };

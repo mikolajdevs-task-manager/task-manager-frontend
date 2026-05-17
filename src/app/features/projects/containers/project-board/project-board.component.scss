@@ -1,0 +1,256 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: var(--q-bg);
+}
+
+// Topbar
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px 12px;
+  border-bottom: 1px solid var(--q-border);
+  background: var(--q-bg);
+  flex-shrink: 0;
+}
+
+.topbar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.crumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--q-text-lo);
+}
+
+.crumb-sep {
+  font-size: 12px !important;
+  width: 12px !important;
+  height: 12px !important;
+  color: var(--q-text-lo);
+}
+
+.crumb-current {
+  color: var(--q-text-md);
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.project-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--q-text-hi);
+  letter-spacing: -0.2px;
+}
+
+.project-sep {
+  width: 1px;
+  height: 14px;
+  background: var(--q-border);
+  flex-shrink: 0;
+}
+
+.project-desc {
+  font-size: 12px;
+  color: var(--q-text-md);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Topbar actions
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.icon-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--q-surface);
+  border: 1px solid var(--q-border);
+  color: var(--q-text-md);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    border-color 0.12s,
+    background 0.12s,
+    color 0.12s;
+
+  mat-icon {
+    font-size: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  &:hover,
+  &.active {
+    border-color: var(--q-border-str);
+    background: var(--q-surface-alt);
+    color: var(--q-text-hi);
+  }
+}
+
+// Custom dropdown menu
+.project-menu-wrap {
+  position: relative;
+}
+
+.project-menu {
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  min-width: 168px;
+  background: var(--q-surface);
+  border: 1px solid var(--q-border);
+  border-radius: 8px;
+  box-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.1),
+    0 2px 6px rgba(15, 23, 42, 0.06);
+  padding: 4px;
+  z-index: 200;
+}
+
+.project-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  font-family: 'Geist', sans-serif;
+  font-size: 12.5px;
+  color: var(--q-text-md);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background 0.1s,
+    color 0.1s;
+
+  mat-icon {
+    font-size: 14px !important;
+    width: 14px !important;
+    height: 14px !important;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background: var(--q-surface-alt);
+    color: var(--q-text-hi);
+  }
+
+  &.destructive:hover {
+    background: oklch(97% 0.03 25);
+    color: oklch(50% 0.18 25);
+  }
+}
+
+.project-menu-divider {
+  height: 1px;
+  background: var(--q-border);
+  margin: 3px 4px;
+}
+
+.edit-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 11px;
+  border-radius: 6px;
+  background: var(--q-text-hi);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 500;
+  font-family: 'Geist', sans-serif;
+  transition: opacity 0.12s;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.edit-icon {
+  font-size: 14px !important;
+  width: 14px !important;
+  height: 14px !important;
+}
+
+// Board container
+.board-container {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+// Empty state
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 8px;
+  padding: 2rem;
+}
+
+.empty-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--q-text-hi);
+}
+
+.empty-sub {
+  margin: 0;
+  font-size: 13px;
+  color: var(--q-text-md);
+}
+
+.create-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 7px;
+  background: var(--q-text-hi);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Geist', sans-serif;
+
+  mat-icon {
+    font-size: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+  }
+}

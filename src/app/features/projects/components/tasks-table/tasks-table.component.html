@@ -1,0 +1,99 @@
+<div class="kanban-shell">
+  <div class="kanban-board">
+    @for (col of columns; track col.status) {
+      <div class="kanban-column">
+        <div class="col-header">
+          <span class="col-dot" [style.background]="dotColor(col.status)"></span>
+          <span class="col-label">{{ col.label }}</span>
+          <span class="col-count">{{ tasksFor(col.status).length }}</span>
+          <button class="col-add" matTooltip="Add task" (click)="create.emit()">
+            <mat-icon class="col-add-icon">add</mat-icon>
+          </button>
+        </div>
+
+        <div class="col-body">
+          @for (task of tasksFor(col.status); track task.id) {
+            <div class="task-card" [class.selected]="selectedTask()?.id === task.id" (click)="selectTask(task)">
+              <span class="card-accent"></span>
+              <div class="card-title">{{ task.title }}</div>
+              <div class="card-desc">{{ task.description }}</div>
+              <div class="card-meta">
+                <span class="card-id">#{{ task.id }}</span>
+                <span class="card-chevron">
+                  <mat-icon>chevron_right</mat-icon>
+                </span>
+              </div>
+            </div>
+          }
+
+          @if (tasksFor(col.status).length === 0) {
+            <div class="empty-col">No tasks</div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  @if (selectedTask()) {
+    <div class="detail-backdrop" (click)="closeDetail()"></div>
+  }
+
+  <div class="detail-panel" [class.open]="!!selectedTask()">
+    @if (selectedTask(); as task) {
+      <div class="detail-hd">
+        <span class="detail-task-id">#{{ task.id }}</span>
+        <button class="detail-close" matTooltip="Close" (click)="closeDetail()">
+          <mat-icon class="close-icon">close</mat-icon>
+        </button>
+      </div>
+
+      <div class="detail-body">
+        <div class="detail-main">
+          <div class="detail-title">{{ task.title }}</div>
+          <div class="detail-desc">{{ task.description }}</div>
+        </div>
+
+        <div class="detail-meta">
+          <div class="meta-row">
+            <span class="meta-key">Status</span>
+            <span class="status-chip">
+              <span class="status-dot" [style.background]="dotColor(task.status)"></span>
+              {{ statusLabel(task.status) }}
+            </span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-key">ID</span>
+            <span class="meta-val mono">#{{ task.id }}</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-key">Created</span>
+            <span class="meta-val mono">{{ task.createdAt | date: 'dd MMM yyyy, HH:mm' }}</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-key">Updated</span>
+            <span class="meta-val mono">{{ task.updatedAt | date: 'dd MMM yyyy, HH:mm' }}</span>
+          </div>
+        </div>
+
+        <div class="move-section">
+          <span class="meta-key">Move to</span>
+          <div class="move-btns">
+            @for (col of columns; track col.status) {
+              @if (col.status !== task.status) {
+                <button class="move-btn" (click)="moveFromDetail(task, col.status)">
+                  <span class="status-dot" [style.background]="dotColor(col.status)"></span>
+                  {{ col.label }}
+                </button>
+              }
+            }
+          </div>
+        </div>
+
+        <div class="detail-footer">
+          <button class="detail-edit-btn" (click)="editFromDetail(task)">Edit task</button>
+          <button class="detail-delete-btn" (click)="deleteFromDetail(task)">Delete</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>

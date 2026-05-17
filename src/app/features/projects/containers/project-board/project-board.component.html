@@ -1,0 +1,63 @@
+@if (project()) {
+  <header class="topbar">
+    <div class="topbar-info">
+      <div class="crumb">
+        <span>Projects</span>
+        <mat-icon class="crumb-sep">chevron_right</mat-icon>
+        <span class="crumb-current">{{ project().name }}</span>
+      </div>
+      <div class="title-row">
+        <span class="project-name">{{ project().name }}</span>
+        @if (project().description) {
+          <span class="project-sep"></span>
+          <span class="project-desc">{{ project().description }}</span>
+        }
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <div class="project-menu-wrap">
+        <button class="icon-btn" [class.active]="menuOpen()" (click)="toggleMenu($event)">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        @if (menuOpen()) {
+          <div class="project-menu" (click)="$event.stopPropagation()">
+            <button class="project-menu-item" (click)="openEditProject(); menuOpen.set(false)">
+              <mat-icon>edit</mat-icon>
+              Edit project
+            </button>
+            <div class="project-menu-divider"></div>
+            <button class="project-menu-item destructive" (click)="deleteProject()">
+              <mat-icon>delete</mat-icon>
+              Delete project
+            </button>
+          </div>
+        }
+      </div>
+      <button class="edit-btn" (click)="openEditProject()">
+        <mat-icon class="edit-icon">edit</mat-icon>
+        Edit project
+      </button>
+    </div>
+  </header>
+
+  <div class="board-container">
+    @if (project().tasks) {
+      <app-tasks-table
+        [tasks]="project().tasks"
+        (create)="onTaskCreate()"
+        (delete)="onTaskDelete($event)"
+        (edit)="onTaskEdit($event)"
+        (move)="onTaskMove($event.task.id, $event.status)"
+      ></app-tasks-table>
+    }
+  </div>
+} @else {
+  <div class="empty-state">
+    <p class="empty-title">No project selected</p>
+    <p class="empty-sub">Create your first project to get started</p>
+    <button class="create-btn" (click)="openCreateProject()">
+      <mat-icon>create_new_folder</mat-icon>
+      Create project
+    </button>
+  </div>
+}

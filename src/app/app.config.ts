@@ -5,5 +5,6 @@ export const authCodeFlowConfig: AuthConfig = {
   redirectUri: window.location.origin,
   clientId: 'taskmanager-web',
   responseType: 'code',
-  scope: 'openid profile'
+  scope: 'openid profile',
+  sessionChecksEnabled: false
 };

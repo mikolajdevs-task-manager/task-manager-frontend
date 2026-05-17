@@ -1,0 +1,33 @@
+<div class="tm-header">
+  <span class="tm-icon-wrap destructive">
+    <mat-icon>delete</mat-icon>
+  </span>
+  <div class="tm-title-col">
+    <span class="tm-eyebrow">{{ eyebrow }}</span>
+    <span class="tm-title">{{ data.title }}</span>
+  </div>
+  <button class="tm-close" (click)="cancel()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <div class="tm-body">
+    <p class="tm-body-text" style="margin: 0">{{ data.message }}</p>
+    @if (data.kind === 'project' && data.taskCount) {
+      <div class="tm-danger-note">
+        All
+        <strong>{{ data.taskCount }} tasks</strong>
+        in this project will be permanently removed.
+      </div>
+    }
+  </div>
+</mat-dialog-content>
+
+<div class="tm-footer">
+  <button class="tm-btn-ghost" (click)="cancel()">Cancel</button>
+  <button class="tm-btn-danger" (click)="confirm()">
+    <mat-icon>delete</mat-icon>
+    {{ data.confirmLabel ?? 'Delete' }}
+  </button>
+</div>
