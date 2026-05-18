@@ -1,18 +1,16 @@
-FROM node:18.19.1 AS builder
+FROM node:24-alpine AS builder
 
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-
-RUN npm install -g @angular/cli
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY . .
-
-RUN npm run build --prod
+RUN npm run build
 
 FROM nginx:alpine
 
-COPY --from=builder /app/dist/todo-list-ui/browser /usr/share/nginx/html
+COPY --from=builder /app/dist/task-manager-frontend/browser /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 CMD ["nginx", "-g", "daemon off;"]

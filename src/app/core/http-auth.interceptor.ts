@@ -25,7 +25,8 @@ export class HttpAuthInterceptor implements HttpInterceptor {
             console.error('Interceptor error:', error);
           }
           if (error.status === 401) {
-            this.oauthService.logOut();
+            this.oauthService.logOut(true);
+            this.oauthService.initCodeFlow();
             return;
           }
           this.errorHandler.handleError(error);

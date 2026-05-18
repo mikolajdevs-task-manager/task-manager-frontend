@@ -26,11 +26,18 @@ function initializeOAuth(oauthService: OAuthService): () => Promise<void> {
           if (window.location.search) {
             window.history.replaceState({}, document.title, window.location.pathname);
           }
+          document.getElementById('startup-overlay')?.remove();
           resolve();
         })
         .catch(() => {
-          oauthService.logOut(true);
-          oauthService.initCodeFlow();
+          const msg = document.getElementById('startup-msg');
+          if (msg) msg.innerHTML = 'Server is waking up after inactivity.<br>Page will refresh automatically in <span id="cd">60</span>s.';
+          let t = 60;
+          const iv = setInterval(() => {
+            const el = document.getElementById('cd');
+            if (el) el.textContent = String(--t);
+            if (t <= 0) { clearInterval(iv); window.location.reload(); }
+          }, 1000);
           resolve();
         });
     });
