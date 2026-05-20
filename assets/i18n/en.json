@@ -1,0 +1,16 @@
+{
+  "theme": {
+    "title": "Task manager",
+    "logout": "Logout"
+  },
+  "auth.common.email": "Email",
+  "auth.common.password": "Password",
+  "auth.login": "Login",
+  "auth.signUp": "Sign up",
+  "auth.signUp.register": "Register",
+  "auth.signUp.confirmPassword": "Confirm Password",
+  "auth.signUp.backToLogin": "Back to login",
+  "auth.signUp.error.emailTaken": "This email is already registered",
+  "auth.signUp.error.passwordsMismatch": "Passwords do not match",
+  "tasks.title": "Your tasks"
+}
